@@ -1,26 +1,28 @@
-
-import React, { Component } from 'react'
-import axios from 'axios'
+import React, { Component } from "react";
+import axios from "axios";
 
 export default class AxiosDemo extends Component {
-  
   state = {
-    persons: []
+    persons: [],
+  };
+
+  componentDidMount() {
+    axios.get("https://jsonplaceholder.typicode.com/users").then((res) => {
+      const persons = res.data;
+      this.setState({ persons });
+    });
   }
 
-  componentDidMount(){
-    axios.get('https://jsonplaceholder.typicode.com/users')
-    .then(res=>{
-        const persons = res.data
-        this.setState({persons})
-    })
-  }
-  
-    render() {
+  render() {
     return (
       <div>
-            {this.state.persons.map(person=><li>Person:{person.name} Email:{person.email}</li>)}
+        {this.state.persons.map((person) => (
+          <li>
+            Person:{person.name} Email:{person.email}
+          </li>
+        ))}
+        {console.log("git test")}
       </div>
-    )
+    );
   }
 }
